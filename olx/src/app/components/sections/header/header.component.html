@@ -1,0 +1,90 @@
+<nav class="navbar navbar-expand-lg bg-danger  ">
+    <div class="container-fluid ">
+      <a class="navbar-brand text-white" [routerLink]="['/home']">MercaTwo</a>
+      <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item ">
+            <a class="nav-link active text-white" aria-current="page" [routerLink]="['/profile']">Perfil</a>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-light mx-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Categorias</button>
+          </li>
+         
+          <li class="nav-item">
+          </li>
+        </ul>
+        <form class="d-flex " role="search">
+            <button class="btn btn-outline-dark me-1 " type="submit">Buscar</button>
+          <input class="form-control me-2 " type="search" placeholder="¿Que estas buscando?" aria-label="Search">
+        </form>
+        <!-- <button type="button" class="btn btn-dark mx-2">Vender</button> -->
+        <button type="button" class="btn btn-dark ms-3" [routerLink]="['/login']">Iniciar sesión</button>
+
+      </div>
+    </div>
+  </nav>
+
+
+
+
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+  <div class="offcanvas-header">
+    <h4 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Categorias</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <!-- Here content -->
+    <ul class="list-unstyled px-4">
+        <li><h5>Nombre categoria</h5></li>
+        <li>categoria aqui</li>
+        <li>categoria aqui</li>
+        <li>categoria aqui</li>
+    </ul>
+    <ul class="list-unstyled px-4">
+        <li><h5>Nombre categoria</h5></li>
+        <li>categoria aqui</li>
+        <li>categoria aqui</li>
+        <li>categoria aqui</li>
+    </ul>
+    <ul class="list-unstyled px-4">
+        <li><h5>Nombre categoria</h5></li>
+        <li>categoria aqui</li>
+        <li>categoria aqui</li>
+        <li>categoria aqui</li>
+    </ul>
+    <ul class="list-unstyled px-4">
+        <li><h5>Nombre categoria</h5></li>
+        <li>categoria aqui</li>
+        <li>categoria aqui</li>
+        <li>categoria aqui</li>
+    </ul>
+    <ul class="list-unstyled px-4">
+        <li><h5>Nombre categoria</h5></li>
+        <li>categoria aqui</li>
+        <li>categoria aqui</li>
+        <li>categoria aqui</li>
+    </ul>
+    <ul class="list-unstyled px-4">
+        <li><h5>Nombre categoria</h5></li>
+        <li>categoria aqui</li>
+        <li>categoria aqui</li>
+        <li>categoria aqui</li>
+    </ul>
+    <ul class="list-unstyled px-4">
+        <li><h5>Nombre categoria</h5></li>
+        <li>categoria aqui</li>
+        <li>categoria aqui</li>
+        <li>categoria aqui</li>
+    </ul>
+    <ul class="list-unstyled px-4">
+        <li><h5>Nombre categoria</h5></li>
+        <li>categoria aqui</li>
+        <li>categoria aqui</li>
+        <li>categoria aqui</li>
+    </ul>
+    
+  </div>
+</div>

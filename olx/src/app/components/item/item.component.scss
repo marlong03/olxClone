@@ -1,0 +1,17 @@
+.img__profile{
+    width: 85px;
+    height: 85px;
+    box-sizing: border-box;
+    object-fit: cover;
+    border-radius: 100%;
+}
+.icon__favorite img{
+    border: 2px solid black;
+    padding:7px;
+    width: 40px;
+    border-radius: 100%;
+    &:hover{
+        background-color: #dc3545;
+        cursor: pointer;
+    }
+}
