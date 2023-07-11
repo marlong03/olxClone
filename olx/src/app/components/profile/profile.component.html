@@ -1,27 +1,30 @@
 <app-header></app-header>
 
-<div class="container-fluid d-flex">
+<div class="container-fluid d-flex" *ngIf="usuario">
 
     <aside class="col-3 px-3 py-5 px-3 me-3 mt-3  d-flex   flex-column border-end border-secondary-subtle  ">
         <div class="d-flex justify-content-center flex-column border-">
             <div class="d-flex align-items-center flex-column">
-                <img src="assets/imgs/zapato.jpg" alt="" class="img__profile me-3 border border-secondary ">
-                <h4 class="mx-2 my-3">Marlong Mendoza</h4>
+                <img src="{{usuario.imagen}}" alt="" class="img__profile me-3 border border-secondary ">
+                <h4 class="mx-2 my-3">{{usuario.nombre.split(' ')[0] +' '+ usuario.apellido.split(' ')[0]  }}</h4>
             </div>
             <div>
                 <table class="table">
                     <tbody>
                       <tr class="d-flex flex-wrap">
                         <th scope="row">Correo</th>
-                        <td>marlongyes@gmail.com</td>
+                        <td>{{usuario.email}}</td>
                       </tr>
                       <tr class="d-flex flex-wrap">
                         <th scope="row">Telefono</th>
-                        <td>3022265434</td>
+                        <td>{{usuario.telefono}}</td>
                       </tr>
                       <tr class="d-flex flex-wrap"> 
                         <th scope="row">Ubicación</th>
-                        <td>Bogota, Colombia</td>
+                        <td>{{usuario.ubicacion}}</td>
+                      </tr>
+                      <tr class="d-flex flex-wrap"> 
+                        <td ><input type="button" value="Editar Perfil" class="py-3 px-5 btn btn-danger text-light " [routerLink]="['/profile/edit/'+idEditPerfil]"></td>
                       </tr>
                     </tbody>
                   </table>
@@ -29,7 +32,7 @@
         </div>   
     </aside>
     <div>
-        <app-list-items></app-list-items>
+        <app-list-items [inputIdUserProfile]="usuario.iduser"></app-list-items>
     </div>
 </div>
 <app-footer></app-footer>

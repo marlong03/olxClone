@@ -14,7 +14,9 @@ import { HeaderComponent } from './components/sections/header/header.component';
 import { FooterComponent } from './components/sections/footer/footer.component';
 import { ListItemsComponent } from './components/sections/list-items/list-items.component';
 import { CreateItemComponent } from './components/create-item/create-item.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -29,12 +31,16 @@ import { CreateItemComponent } from './components/create-item/create-item.compon
     HeaderComponent,
     FooterComponent,
     ListItemsComponent,
-    CreateItemComponent
+    CreateItemComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
+    NgxPaginationModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

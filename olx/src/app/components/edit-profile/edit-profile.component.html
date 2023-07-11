@@ -1,0 +1,83 @@
+<app-header></app-header>
+
+<div class="container-fluid">
+    
+<div class="container-fluid d-flex" *ngIf="usuario">
+
+    <aside class="col-3 px-3 py-5 px-3 me-3 mt-3  d-flex   flex-column border-end border-secondary-subtle  ">
+        <div class="d-flex justify-content-center flex-column border-">
+            <div class="d-flex align-items-center flex-column">
+                <img src="{{usuario.imagen}}" alt="" class="img__profile me-3 border border-secondary ">
+                <h4 class="mx-2 my-3">{{usuario.nombre.split(' ')[0] +' '+ usuario.apellido.split(' ')[0]}}</h4>
+            </div>
+            <div>
+                <table class="table">
+                    <tbody>
+                      <tr class="d-flex flex-wrap">
+                        <th scope="row">Correo</th>
+                        <td>{{usuario.email}}</td>
+                      </tr>
+                      <tr class="d-flex flex-wrap">
+                        <th scope="row">Telefono</th>
+                        <td>{{usuario.telefono}}</td>
+                      </tr>
+                      <tr class="d-flex flex-wrap"> 
+                        <th scope="row">Ubicación</th>
+                        <td>{{usuario.ubicacion}}</td>
+                      </tr>
+                      <tr class="d-flex flex-wrap"> 
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>   
+    </aside>
+    <div class="d-flex justify-content-center alig-items-center pt-5">
+        <div class="container-fluid d-flex justify-content-center align-items-center flex-column h-100Por w-75  ">
+    
+            <form class="row g-3 border  border-secondary rounded px-4  ">
+                <div class="mt-3 mb-0 d-flex justify-content-center">
+                    <h1>Editar perfil</h1>
+                  </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control border border-secondary mx-1" placeholder="Nombre(s)" name="nombre" [(ngModel)]="usuarioEdit.nombre" value="{{usuario.nombre}}" >
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control border border-secondary mx-1" id="inputAddress" placeholder="Apellido(s)" name="apellido"[(ngModel)]="usuarioEdit.apellido" value="{{usuario.apellido}}" >
+              </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control border border-secondary mx-1" id="inputAddress2" placeholder="Telefono" name="telefono" [(ngModel)]="usuarioEdit.telefono" value="{{usuario.telefono}}">
+                </div>
+                <div class="col-md-6">
+                    <input type="email" class="form-control border border-secondary mx-1" id="inputEmail4" placeholder="Correo" name="email" [(ngModel)]="usuarioEdit.email" value="{{usuario.email}}">
+                </div>
+               
+              
+                <div class="col-md-6">
+                  <select id="inputState" class="form-select border border-secondary mx-2">
+                    <option selected>{{usuarioEdit.ubicacion}}</option>
+                    <option>...</option>
+                  </select>
+                </div>
+                <div class="col-md-12 d-flex alig-items-center justify-content-center border border-secondary rounded p-3">
+                    <div><img src="{{usuarioEdit.imagen}}" alt="" class="img__profile me-3 border border-secondary "></div>
+                    <div class="d-flex flex-column alig-items-center justify-content-center">
+                        <h5>{{usuarioEdit.nombre.split(' ')[0] +' '+ usuarioEdit.apellido.split(' ')[0]}}</h5>
+                        <input type="file" class="form-control border  border-secondary"></div>
+                  </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-danger p-3 w-100 mb-4" (click)="editarUsuario()">Guardar</button>
+                </div>
+              </form>
+              <div class="border border-secondary p-3 my-3 rounded d-flex flex-column">
+                <div><h5>Cambiar contraseña</h5></div>
+                <div class="d-flex">
+                    <input type="password" placeholder="Contraseña Actual" class="border border-secondary p-2 m-2 rounded form-control" [(ngModel)]="passwordAnterior">
+                    <input type="password" placeholder="Contraseña Nueva" class="border border-secondary p-2 m-2 rounded form-control" [(ngModel)]="passwordNueva">
+                    <input type="button" value="Guardar" class="p-2 m-2 rounded btn btn-danger text-light" (click)="cambiarPassword()">
+                </div>
+
+              </div>
+            </div>
+    </div>
+</div>

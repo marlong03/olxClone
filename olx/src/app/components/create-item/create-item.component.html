@@ -7,7 +7,7 @@
             <table class="table">
                 <tbody>
                     <tr class="d-flex flex-wrap">
-                        <th scope="row" class="p-0 m-0"><h4 class="title__section">Crear articulo</h4></th>
+                        <th scope="row" class="p-0 m-0"><h4 class="title__section">Editar Articulo</h4></th>
                         
                     </tr>
                     <tr class="d-flex flex-wrap">
@@ -19,24 +19,31 @@
                     <tr class="d-flex flex-wrap">
                     <th scope="row" class="p-0 m-0">Titulo</th>
                     <td>
-                        <input type="text"  class="form-control border border-danger" aria-labelledby="passwordHelpInline" placeholder="Titulo">
+                        <input type="text"  class="form-control border border-danger" aria-labelledby="passwordHelpInline" placeholder="Titulo" [(ngModel)]="articuloEdit.titulo" value="{{articulo.titulo}}">
                     </td>
                     </tr>
                     <tr class="d-flex flex-wrap p-0 m-0">
                     <th scope="row" class="p-0 m-0">Precio</th>
                     <td>
-                        <input type="number"  class="form-control border border-danger" aria-labelledby="passwordHelpInline" placeholder="precio">
+                        <input type="number"  class="form-control border border-danger" aria-labelledby="passwordHelpInline" placeholder="precio"  [(ngModel)]="articuloEdit.precio" value="{{articulo.precio}}" >
                     </td>
                     </tr>
+                    <tr class="d-flex flex-wrap p-0 m-0">
+                        <th scope="row" class="p-0 m-0">Fecha</th>
+                        <td>
+                            <p class="form-control border border-danger ">{{articuloEdit.fecha | date}}</p>
+                        </td>
+                    </tr>
                     <tr class="d-flex flex-wrap">
-                    <th scope="row" >Categoria</th>
+                    <th scope="row">Categoria</th>
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-outline-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Seleccione...
                             </button>
                             <ul class="dropdown-menu">
-                                <li class="dropdown-item">Casa - Hogar</li>
+                                <li class="dropdown-item">{{articulo.categoria_idcategoria.nombre}}</li>
+                                <li class="dropdown-item">Hogar</li>
                                 <li class="dropdown-item">Ropa</li>
                                 <li class="dropdown-item">Belleza</li>
                                 <li class="dropdown-item">Accesorios</li>
@@ -56,9 +63,10 @@
                                 Seleccione...
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" >Nuevo - Como nuevo</a></li>
-                                <li><a class="dropdown-item" >Usado - Buen estado</a></li>
-                                <li><a class="dropdown-item" >Aceptable</a></li>
+                                <li class="dropdown-item" >{{articulo.estado}}</li>
+                                <li class="dropdown-item" > nuevo</li>
+                                <li class="dropdown-item" >usado</li>
+                                <li class="dropdown-item" >aceptable</li>
                             </ul>
                         </div>
                     </td>
@@ -67,7 +75,7 @@
                     <th scope="row">Descripcion</th>
                     <td>
                         <div class="form-group">
-                            <textarea placeholder="Mas información..." class="form-control border border-danger" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea placeholder="Mas información..." class="form-control border border-danger" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="articuloEdit.descripcion">{{articulo.descripcion}}</textarea>
                         </div>
                     </td>
                     </tr>
@@ -78,21 +86,21 @@
     <div class="col-7 d-flex  mx-auto alig-items-center flex-column "  >
         <div class="mt-4 mb-3 d-flex justify-content-between">
             <h3>Vista previa</h3>
-            <input type="button" class="btn btn-dark px-4" value="Guardar">
+            <input type="button" class="btn btn-dark px-4" value="Guardar" (click)="editarArticulo()">
         </div>
         <div class="container border border-secondary  mx-auto  p-3 d-flex justify-content-center rounded ">
             <div class="col-6 me-2 flex-column">
                 <div id="carouselExample" class="carousel slide">
                     <div class="carousel-inner">
                       <div class="carousel-item active">
+                        <img src="{{articulo.imagen}}" class="d-block w-100" alt="...">
+                      </div>
+                      <!-- <div class="carousel-item">
                         <img src="assets/imgs/zapato.jpg" class="d-block w-100" alt="...">
                       </div>
                       <div class="carousel-item">
                         <img src="assets/imgs/zapato.jpg" class="d-block w-100" alt="...">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="assets/imgs/zapato.jpg" class="d-block w-100" alt="...">
-                      </div>
+                      </div> -->
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -116,20 +124,20 @@
                   </div>
             </div>
             <div class="col-5 d-flex flex-column  ">
-                <div class="p-3 border border-secondary rounded">
-                    <h2>{{40000 | currency}}</h2>
-                    <p>Zapatos cuero</p>
+                <div class="p-3 border border-secondary rounded"> <!-- NO PINTA BIEN -->
+                    <h2>{{articuloEdit.precio | currency}}</h2>
+                    <p >{{articuloEdit.titulo}}</p>
                     <div class="d-flex justify-content-between">
-                        <em>Bogota, Colombia</em>
-                        <small class="text-secondary">02/11/2023</small>
+                        <em>{{articulo.user_iduser.ubicacion}}, Colombia</em>
+                        <small class="text-secondary">{{articulo.fecha | date}}</small>
                     </div>
                 </div>
                 <div class="p-3  border border-secondary rounded my-3 d-flex align-items-center justify-content-center">
                     <div class="d-flex align-items-center">
-                        <img src="assets/imgs/zapato.jpg" alt="" class="img__profile me-3 border border-secondary ">
+                        <img src="{{articulo.user_iduser.imagen}}" alt="" class="img__profile me-3 border border-secondary ">
                     </div>
                     <div>
-                        <h5 class="text-center" >Marlong Mendoza</h5>
+                        <h5 class="text-center" >{{articulo.user_iduser.nombre}}</h5>
                         <input type="button" value="Ver perfil" class="btn btn-outline-dark p-2 w-100 mt-3 " [routerLink]="['/profile']">
                     </div>
                 </div>

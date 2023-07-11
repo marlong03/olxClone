@@ -7,13 +7,20 @@ import { ItemComponent } from './components/item/item.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CreateItemComponent } from './components/create-item/create-item.component';
+import { CategoryComponent } from './components/category/category.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
+  { path: 'home/category/:nombre', component: HomeComponent},
+
   { path: 'login', component: LoginComponent},
+  { path: 'category/:nombre', component: CategoryComponent},
+
   { path: 'register', component: RegisterComponent},
-  { path: 'profile', component: ProfileComponent},
-  { path: 'item', component: ItemComponent}, //Quitar
+  { path: 'profile/:id', component: ProfileComponent},
+  { path: 'profile/edit/:id', component: EditProfileComponent},
+
   { path: 'item/new', component: CreateItemComponent},
 /*   { path: 'item/:id', component: ItemComponent}, */
  
