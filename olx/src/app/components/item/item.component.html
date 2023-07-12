@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div>
-                <input type="button" class="btn btn-danger p-3 w-100" value="Editar publicación" [routerLink]="['/item/edit/'+articulo.idarticulo]">
+                <input type="button" class="btn btn-danger p-3 w-100" value="Editar publicación" *ngIf="permiseEdit" [routerLink]="['/item/edit/'+articulo.idarticulo]">
             </div>
 
         </div>

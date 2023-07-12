@@ -27,7 +27,16 @@ export class CreateItemComponent implements OnInit {
     
     articulo:any = {}
     articuloEdit:any = {
-    
+      idarticulo: this.articulo.idarticulo,
+      titulo: this.articulo.titulo,
+      precio: this.articulo.precio,
+      descripcion: this.articulo.descripcion,
+      fecha: this.articulo.fecha,
+      situacion: this.articulo.situacion,
+      imagen: this.articulo.imagen,
+      categoria_idcategoria:1,
+      user_iduser:1,
+      estado:this.articulo.estado
       //faltan foraneas
     }
    /*  {

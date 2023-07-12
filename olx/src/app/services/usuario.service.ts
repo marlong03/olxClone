@@ -10,6 +10,9 @@ export class UsuarioService {
   obtenerUsuario(id:number){
     return this.http.get('http://localhost:3000/usuario/'+id)
   }
+  obtenerUsuarioPorEmail(email:string){
+    return this.http.get('http://localhost:3000/usuario/email/'+email)
+  }
   editarUsuario(usuario:any){
     return this.http.put('http://localhost:3000/usuario/update/'+usuario.iduser,usuario)
   }

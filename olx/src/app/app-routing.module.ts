@@ -11,8 +11,6 @@ import { CategoryComponent } from './components/category/category.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent},
-  { path: 'home/category/:nombre', component: HomeComponent},
 
   { path: 'login', component: LoginComponent},
   { path: 'category/:nombre', component: CategoryComponent},

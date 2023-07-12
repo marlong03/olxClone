@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 
 @Component({
@@ -7,12 +9,20 @@ import { CategoriaService } from 'src/app/services/categoria.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private cs:CategoriaService){}
+  constructor(private cs:CategoriaService,
+              private authService:AuthService,
+              private router:Router){}
 
   ngOnInit(): void {
     this.obtenerCategorias()
-  }
+   
 
+    if(this.usuarioLocal.length == 1){
+      this.userLogged = true
+    }
+  }
+  userLogged = false
+  usuarioLocal = JSON.parse(localStorage.getItem('dataUser') || '[]')
   @Output() valueChanged = new EventEmitter<string>();
   mostrarQuitarFiltro = false
   sendValue(value:string) {
@@ -23,8 +33,6 @@ export class HeaderComponent implements OnInit {
     }
     this.valueChanged.emit(value);
   }
-
-
   
   categorias:any 
   obtenerCategorias(){
@@ -35,4 +43,13 @@ export class HeaderComponent implements OnInit {
   }
   seleccionarCategoria(id:number){
   }
+  logout(){
+    
+  }
+  cerrarSesion(){
+    this.authService.logout();
+    this.router.navigate(['/login'])
+    localStorage.removeItem('dataUser')
+  }
+  
 }

@@ -11,5 +11,6 @@ export class CategoriaService {
   obtenerCategoria(){
     return this.http.get('http://localhost:3000/categoria')
   }
+  //validar si la categoria colocada en url existe y si no existe devolver al home
 
 }

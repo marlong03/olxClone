@@ -15,9 +15,20 @@ export class ProfileComponent implements OnInit {
       let {id} = params
       console.log(id);
       this.obtenerUsuario(id)
-       
+      if(this.usuarioLocal.length == 1){
+        this.userLogged = true
+        if(parseInt(this.usuarioLocal[0].iduser) == parseInt(id)){
+          this.permiseEdit = true
+        }else{
+          this.permiseEdit = false
+        }
+      }
+      
     })
   }
+  permiseEdit = false
+  userLogged = false
+  usuarioLocal = JSON.parse(localStorage.getItem('dataUser') || '[]')
   idEditPerfil = 1;
   usuario:any
   obtenerUsuario(id:number){
@@ -28,5 +39,6 @@ export class ProfileComponent implements OnInit {
     })
     
   }
+  
   
 }

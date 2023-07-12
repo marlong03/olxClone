@@ -64,6 +64,17 @@ app.get('/usuario/:id', (req, res) => {
     res.json(rows);
   });
 });
+app.get('/usuario/email/:email', (req, res) => {
+  const query = 'SELECT * FROM user where email = ?';
+  const {email} = req.params
+  connection.query(query,[email],(err, rows) => {
+    if (err) {
+      console.error('Error al ejecutar la consulta:', err);
+      return res.status(500).json({ error: 'Error al obtener los usuarios' });
+    }
+    res.json(rows);
+  });
+});
 app.get('/articulo', (req, res) => {
     const query = `
       SELECT 

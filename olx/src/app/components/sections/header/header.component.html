@@ -11,14 +11,18 @@
             <button class="btn btn-light mx-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Categorias</button>
           </li>
           <li class="nav-item">
+          <input type="button" class="btn btn-outline-light ms-1"  [routerLink]="['/profile/'+usuarioLocal[0].iduser]" value="Perfil" *ngIf="userLogged">
+
           </li>
         </ul>
        
         <!-- <button type="button" class="btn btn-dark mx-2">Vender</button> -->
         <div class="d-flex alig-items-center justify-content-center">
 
-          <input type="button" class="btn btn-outline-light"  [routerLink]="['/profile']" value="Perfil">
-          <button type="button" class="btn btn-dark ms-3" [routerLink]="['/login']" >Iniciar sesión</button>
+          <button type="button" class="btn btn-dark ms-3" [routerLink]="['/login']" *ngIf="!userLogged">Iniciar sesión</button>
+          <button type="button" class="btn btn-outline-light ms-3" (click)="cerrarSesion()" *ngIf="userLogged">Cerrar sesión</button>
+          <button type="button" class="btn btn-dark ms-3" *ngIf="userLogged">Vender</button>
+
         </div>
         
       </div>

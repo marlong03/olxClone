@@ -18,6 +18,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 
+/* Auth */
+import { AngularFireModule } from '@angular/fire/compat'
+import { AngularFireAuthModule } from '@angular/fire/compat/auth'
+import { FirestoreModule } from '@angular/fire/firestore'
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +45,11 @@ import {NgxPaginationModule} from 'ngx-pagination';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    FirestoreModule,
 
   ],
   providers: [],

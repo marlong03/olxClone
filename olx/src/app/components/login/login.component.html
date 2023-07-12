@@ -9,18 +9,14 @@
       <h1>MercaTwo</h1>
     </div>
     <div class="form-group">
-          <input type="email" class="form-control border-secondary my-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo">
+          <input type="email" class="form-control border-secondary my-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" name="email" [(ngModel)]="loginUser.email">
         </div>
         <div class="form-group">
-          <input type="password" class="form-control border-secondary my-2" id="exampleInputPassword1" placeholder="Contraseña">
+          <input type="password" class="form-control border-secondary my-2" id="exampleInputPassword1" placeholder="Contraseña" name="pasword" [(ngModel)]="loginUser.password" >
         </div>
-        <div class="form-check d-flex justify-content-center p-0 ">
-          <input type="checkbox" class="form-check-input border border-secondary mx-1" id="exampleCheck1">
-          <label class="form-check-label " for="exampleCheck1">Recordarme</label>
-          
-        </div>
-        
-        <button type="submit" class="btn btn-danger w-100 p-3">Iniciar sesión</button>
+       
+        <input type="button" class="btn btn-light   m-2 p-1 px-3 btn-reset-password" value="Restablecer contraseña" (click)="resetPassword()">
+        <button type="submit" class="btn btn-danger w-75 py-3 my-2" (click)="login(loginUser)">Iniciar sesión</button>
         
       </form>
 </div>
