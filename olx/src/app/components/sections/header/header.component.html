@@ -15,16 +15,12 @@
 
           </li>
         </ul>
-       
         <!-- <button type="button" class="btn btn-dark mx-2">Vender</button> -->
         <div class="d-flex alig-items-center justify-content-center">
-
           <button type="button" class="btn btn-dark ms-3" [routerLink]="['/login']" *ngIf="!userLogged">Iniciar sesión</button>
           <button type="button" class="btn btn-outline-light ms-3" (click)="cerrarSesion()" *ngIf="userLogged">Cerrar sesión</button>
-          <button type="button" class="btn btn-dark ms-3" *ngIf="userLogged">Vender</button>
-
+          <button type="button" class="btn btn-dark ms-3" *ngIf="userLogged" [routerLink]="['/item/new']">Vender</button>
         </div>
-        
       </div>
     </div>
   </nav>

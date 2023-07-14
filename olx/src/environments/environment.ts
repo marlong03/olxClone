@@ -4,14 +4,17 @@
 
 export const environment = {
     production: false,
-    firebase : {
-        apiKey: "AIzaSyCZ6WIJa528x1FPy0kF1e7a5FqtMXWwmJk",
-        authDomain: "servicio1-bb772.firebaseapp.com",
-        projectId: "servicio1-bb772",
-        storageBucket: "servicio1-bb772.appspot.com",
-        messagingSenderId: "14216898254",
-        appId: "1:14216898254:web:cf298afcf9be699919529f"
-      }
+  firebase: {
+    projectId: 'psicologiaconleila',
+    appId: '1:1058368529721:web:45a16a236d802b4e4574e8',
+    databaseURL: 'https://psicologiaconleila-default-rtdb.firebaseio.com',
+    storageBucket: 'psicologiaconleila.appspot.com',
+    locationId: 'us-central',
+    apiKey: 'AIzaSyCO4kgHvOKJRVl4gd7AZqFV2Sj3lwCx9dI',
+    authDomain: 'psicologiaconleila.firebaseapp.com',
+    messagingSenderId: '1058368529721',
+    measurementId: 'G-74S9XHH404',
+  }
   };
   
   /*

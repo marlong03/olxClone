@@ -299,6 +299,23 @@ app.get('/categoria', (req, res) => {
       res.json(rows);
     });
 });
+app.get('/categoria/nombre/:nombre', (req, res) => {
+   const{ nombre } = req.params
+  const query = 'SELECT nombre FROM categoria where nombre = ?';
+
+  connection.query(query, nombre, (err, rows) => {
+    if (err) {
+      console.error('Error consultar el nombre de la cateogria', err);
+      return res.status(500).json({ error: 'Error consultar el nombre de la cateogria' });
+    }
+    if(rows.length == 0){
+
+      res.json(false);
+    }else{
+      res.json(true);
+    }
+  });
+});
 // CREAR DATOS
 app.post('/usuario/new', (req, res) => {
     const { nombre,apellido,telefono,ubicacion,email,password,imagen } = req.body;

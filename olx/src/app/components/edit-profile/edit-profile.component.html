@@ -60,10 +60,12 @@
                   </select>
                 </div>
                 <div class="col-md-12 d-flex alig-items-center justify-content-center border border-secondary rounded p-3">
-                    <div><img src="{{usuarioEdit.imagen}}" alt="" class="img__profile me-3 border border-secondary "></div>
+                    <div><img src="{{imgPreview}}" alt="" class="img__profile me-3 border border-secondary "></div>
                     <div class="d-flex flex-column alig-items-center justify-content-center">
                         <h5>{{usuarioEdit.nombre.split(' ')[0] +' '+ usuarioEdit.apellido.split(' ')[0]}}</h5>
-                        <input type="file" class="form-control border  border-secondary"></div>
+                        <input type="file" class="form-control border  border-secondary" (change)="cambiarFotoPerfil($event)">
+                        <p *ngIf="estadoCargando">Cargando... Espera por favor</p>
+                      </div>
                   </div>
                 <div class="col-12">
                   <button type="submit" class="btn btn-danger p-3 w-100 mb-4" (click)="editarUsuario()">Guardar</button>

@@ -16,6 +16,8 @@ export class ArticuloService {
   editarArticuloDB(articulo:any){
     return  this.http.put('http://localhost:3000/articulo/update/'+articulo.idarticulo,articulo)
   }
-  
+  crearArticulo(articulo:any){
+    return this.http.post('http://localhost:3000/articulo/new',articulo)
+  }
   
 }

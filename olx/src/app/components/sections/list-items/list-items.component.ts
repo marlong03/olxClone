@@ -1,6 +1,7 @@
 import { Component,Input,OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticuloService } from 'src/app/services/articulo.service';
+import { CategoriaService } from 'src/app/services/categoria.service';
 @Component({
   selector: 'app-list-items',
   templateUrl: './list-items.component.html',
@@ -8,7 +9,8 @@ import { ArticuloService } from 'src/app/services/articulo.service';
 })
 export class ListItemsComponent implements OnInit{
     constructor(private as:ArticuloService,
-                private router:Router){}
+                private router:Router,
+                private cs:CategoriaService){}
  
     @Input() inputIdUserProfile: string = "";
     @Input() inputHome: string = "";
@@ -49,11 +51,19 @@ export class ListItemsComponent implements OnInit{
                     .sort((a:any,b:any)=> b.idarticulo - a.idarticulo);
             }
             else if(filtro == "category"){
-                this.tituloLista = 'Categoria '+ this.valorDelPadre
-                this.listaArticulosPintar = 
-                this.listaArticulosPintar
-                  .filter((articulo:any) =>articulo.categoria_idcategoria.nombre == this.valorDelPadre)
-                  .sort((a:any,b:any)=>b.idarticulo - a.idarticulo);
+                let categoryExist = false
+                this.cs.validarExistenciaCategoria(this.valorDelPadre).subscribe(res =>{
+                    if(res == false){
+                        this.router.navigate([''])
+                    }else{
+                        this.tituloLista = 'Categoria '+ this.valorDelPadre
+                        this.listaArticulosPintar = 
+                        this.listaArticulosPintar
+                          .filter((articulo:any) =>articulo.categoria_idcategoria.nombre == this.valorDelPadre)
+                          .sort((a:any,b:any)=>b.idarticulo - a.idarticulo);
+                    }
+                })
+                
             }
         })
     }

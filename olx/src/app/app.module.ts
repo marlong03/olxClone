@@ -22,7 +22,10 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { AngularFireModule } from '@angular/fire/compat'
 import { AngularFireAuthModule } from '@angular/fire/compat/auth'
 import { FirestoreModule } from '@angular/fire/firestore'
-import { environment } from 'src/environments/environment';
+import { EditItemComponent } from './components/edit-item/edit-item.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,7 @@ import { environment } from 'src/environments/environment';
     ListItemsComponent,
     CreateItemComponent,
     EditProfileComponent,
+    EditItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +54,8 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     FirestoreModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideStorage(() => getStorage()),
 
   ],
   providers: [],

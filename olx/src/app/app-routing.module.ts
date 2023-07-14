@@ -9,6 +9,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CreateItemComponent } from './components/create-item/create-item.component';
 import { CategoryComponent } from './components/category/category.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { EditItemComponent } from './components/edit-item/edit-item.component';
 
 const routes: Routes = [
 
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: 'item/new', component: CreateItemComponent},
 /*   { path: 'item/:id', component: ItemComponent}, */
  
-  { path: 'item/edit/:id', component: CreateItemComponent},
+  { path: 'item/edit/:id', component: EditItemComponent},
   /* { path: 'item/edit/:id', component: CreateItemComponent}, */
 
   { path: 'item/:id', component: ItemComponent},

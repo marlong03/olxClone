@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -9,7 +9,8 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class ProfileComponent implements OnInit {
   constructor(private route:ActivatedRoute,
-              private us:UsuarioService){}
+              private us:UsuarioService,
+              private router:Router){}
   ngOnInit(): void {
     this.route.params.subscribe((params)=>{
       let {id} = params
@@ -23,7 +24,6 @@ export class ProfileComponent implements OnInit {
           this.permiseEdit = false
         }
       }
-      
     })
   }
   permiseEdit = false
@@ -34,8 +34,13 @@ export class ProfileComponent implements OnInit {
   obtenerUsuario(id:number){
     this.us.obtenerUsuario(id).subscribe((usuario:any)=>{
       let listaUsuarios:any = usuario
+
+      if(listaUsuarios.length == 0){
+        this.router.navigate([''])
+    }else{
+
       this.usuario = listaUsuarios[0]
-      console.log(this.usuario);
+    }
     })
     
   }
