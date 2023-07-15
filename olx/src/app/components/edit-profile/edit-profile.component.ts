@@ -22,10 +22,10 @@ export class EditProfileComponent implements OnInit{
         this.usuarioEdit = { iduser,nombre, apellido, ubicacion,email , imagen,telefono } ;
         this.imgPreview = this.usuarioEdit.imagen
       })
-
-      var enlace = 'https://firebasestorage.googleapis.com/v0/b/psicologiaconleila.appspot.com/o/images%2Fnombrefoto.jpg?alt=media&token=43d0ab7b-1189-40b2-9653-ead4cc2eebc9';
+ // https://firebasestorage.googleapis.com/v0/b/servicio1-bb772.appspot.com/o/images%2Favatar.jpg
+      /* var enlace = 'https://firebasestorage.googleapis.com/v0/b/servicio1-bb772.appspot.com/o/images%2F'++'?alt=media&token=f9966959-bb3f-4636-8eeb-de87626e36c2';
       var nombreFoto = enlace.substring(enlace.lastIndexOf('%2F') + 3, enlace.lastIndexOf('?alt'));
-      console.log(nombreFoto);
+      console.log(nombreFoto); */
     })
   }
 
@@ -33,8 +33,11 @@ export class EditProfileComponent implements OnInit{
   usuarioEdit:any =  {}
   editarUsuario(){
     console.log(this.usuarioEdit);
+    this.eliminarImg(this.usuario.imagen)
     this.us.editarUsuario(this.usuarioEdit).subscribe(res =>{
       this.us.obtenerUsuario(this.usuarioEdit.iduser)
+
+      
     });
   }
 
@@ -62,10 +65,9 @@ export class EditProfileComponent implements OnInit{
     console.log(file);
     this.estadoCargando = true
     if(file.size < 5000000){
-      this.eliminarImg(this.usuario.imagen)
-        const imgRef = ref(this.storage, 'images/'+ new Date().getTime())
-        uploadBytes(imgRef, file).then(res =>{
-        this.imgPreview = 'https://firebasestorage.googleapis.com/v0/b/psicologiaconleila.appspot.com/o/images%2F'+ res.metadata.name+'?alt=media&token=43d0ab7b-1189-40b2-9653-ead4cc2eebc9'
+      const imgRef = ref(this.storage, 'images/'+ new Date().getTime())
+      uploadBytes(imgRef, file).then(res =>{
+        this.imgPreview = 'https://firebasestorage.googleapis.com/v0/b/servicio1-bb772.appspot.com/o/images%2F'+res.metadata.name+'?alt=media&token=f9966959-bb3f-4636-8eeb-de87626e36c2';
             this.estadoCargando = false
             this.usuarioEdit.imagen = this.imgPreview
             this.us.obtenerUsuario(this.usuarioEdit.iduser).subscribe(user => {

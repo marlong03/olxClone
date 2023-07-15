@@ -3,7 +3,7 @@
 <div class="m-4" > <h3>{{tituloLista}}</h3></div>
 <div *ngIf="listaArticulosPintar.length == 0" class="mx-5"><h5>No hemos encontrado articulos</h5></div>
 <div class="container-fluid d-flex  alig-items-center  flex-wrap my-3 mx-3" *ngIf="listaArticulosPintar">
-  <div class="card m-2 border border-secondary" style="width: 15rem;" *ngFor="let articulo of listaArticulosPintar  | paginate: { itemsPerPage: 3, currentPage: page } ">
+  <div class="card m-2 border border-secondary" style="width: 15rem;" *ngFor="let articulo of listaArticulosPintar  | paginate: { itemsPerPage: 6, currentPage: page } ">
     <img src="{{articulo.imagen}}" class="card-img-top img__article" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{articulo.titulo}}</h5>

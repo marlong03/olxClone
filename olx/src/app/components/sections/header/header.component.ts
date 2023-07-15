@@ -15,8 +15,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerCategorias()
-   
-
+    
     if(this.usuarioLocal.length == 1){
       this.userLogged = true
     }
