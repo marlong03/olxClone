@@ -16,7 +16,9 @@ export class LoginComponent {
     login(loginUser:any){
       this.authService.login(loginUser.email,loginUser.password).then(res =>{
        /*  localStorage.setItem('userDates',JSON.stringify()) */
-       console.log();
+       console.log(loginUser);
+       
+       console.log(res);
        this.us.obtenerUsuarioPorEmail(loginUser.email).subscribe(user =>{
           localStorage.setItem('dataUser',JSON.stringify(user))
        })

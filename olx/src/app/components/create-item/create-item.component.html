@@ -16,8 +16,10 @@
                     <tr class="d-flex flex-wrap">
                         <th scope="row" class="p-0 m-0">Imagenes</th>
                         <td>
-                            <input type="file" class="form-control border border-danger" multiple="true" >
+                            <input type="file" class="form-control border border-danger" multiple="true" (change)="cargarImg($event)">
+                            <p *ngIf="estadoCargando">Cargando...</p>
                         </td>
+                       
                     </tr>
                     <tr class="d-flex flex-wrap">
                     <th scope="row" class="p-0 m-0">Titulo</th>
@@ -86,7 +88,7 @@
                 <div id="carouselExample" class="carousel slide">
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-                        <img src="assets/imgs/imgFondo.jpg" class="d-block w-100" alt="...">
+                        <img src="{{imgVistaPrevia}}" class="d-block w-100" alt="...">
                       </div>
                       <!-- <div class="carousel-item">
                         <img src="assets/imgs/zapato.jpg" class="d-block w-100" alt="...">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticuloService } from 'src/app/services/articulo.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import { Storage, ref, uploadBytes, listAll , getDownloadURL,deleteObject} from '@angular/fire/storage'
 
 @Component({
   selector: 'app-create-item',
@@ -12,7 +13,8 @@ export class CreateItemComponent implements OnInit {
   constructor(private route:ActivatedRoute,
               private router:Router,
               private as:ArticuloService,
-              private cs:CategoriaService){}
+              private cs:CategoriaService,
+              private storage:Storage){}
   ngOnInit(): void {
     //Traer Usuario
       this.usuario =  JSON.parse(localStorage.getItem('dataUser') || '[]')
@@ -25,10 +27,9 @@ export class CreateItemComponent implements OnInit {
       this.cs.obtenerCategoria().subscribe(categorias =>{
           this.categorias = categorias
           console.log(this.categorias);
-          
       })
-     
   }
+    
     categorias:any
     usuario = []
     articuloNew:any = {
@@ -38,17 +39,43 @@ export class CreateItemComponent implements OnInit {
       descripcion: "",
       fecha: new Date().getTime(),
       situacion:"Disponible" ,
-      imagen: "https://innovationmarketing.files.wordpress.com/2019/10/vender-nuevos-productos.jpg",
+      imagen: "",
       categoria_idcategoria:0,
       user_iduser:"",
       estado:""
+    }
+
+    estadoCargando = false
+    imgVistaPrevia = 'assets/imgs/imgFondo.jpg'
+    cargarImg(event:any){
+      const file = event.target.files[0]
+      console.log(file);
+      this.estadoCargando = true
+      if(file.size < 5000000){
+       /*  this.eliminarImg(this.usuario.imagen) */
+          const imgRef = ref(this.storage, 'images/'+ new Date().getTime())
+          uploadBytes(imgRef, file).then((res:any) =>{
+          this.imgVistaPrevia = 'https://firebasestorage.googleapis.com/v0/b/psicologiaconleila.appspot.com/o/images%2F'+ res.metadata.name+'?alt=media&token=43d0ab7b-1189-40b2-9653-ead4cc2eebc9'
+          this.articuloNew.imagen = this.imgVistaPrevia
+          this.estadoCargando = false
+              /* this.us.obtenerUsuario(this.usuarioEdit.iduser).subscribe(user => {
+                  let listaUser:any = user
+                  this.usuario = listaUser[0]
+              }); */
+          })
+          .catch(err =>{
+            this.estadoCargando = false
+              console.log(err);
+          })
+        }
     }
   
     crearArticulo(){
       if(this.articuloNew.titulo != "" && 
         this.articuloNew.precio != "" &&
         this.articuloNew.categoria_idcategoria != 0 &&
-        this.articuloNew.estado != ""){
+        this.articuloNew.estado != "" &&
+        this.articuloNew.imagen != ""){
           
           this.as.crearArticulo(this.articuloNew).subscribe(res =>{
             alert("se haa creado un nuevo articulo")
@@ -61,12 +88,16 @@ export class CreateItemComponent implements OnInit {
       console.log(this.articuloNew);
       
     }
+
+
     categoriaSeleccionada: any = ""
     seleccionarCategoria(categoria:any) {
       this.articuloNew.categoria_idcategoria = categoria.idcategoria;
       this.categoriaSeleccionada = categoria.nombre
       console.log('Categoría seleccionada:', categoria.idcategoria);
     }
+
+
     estadoSeleccionado = ""
     seleccionarEstado(estado:any) {
       this.articuloNew.estado = estado;

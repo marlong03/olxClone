@@ -43,6 +43,7 @@ export class ListItemsComponent implements OnInit{
             if(filtro == "null"){
                 this.tituloLista = 'Ultimos anuncios'
                 this.listaArticulosPintar = articulos
+                this.listaArticulosPintar = this.listaArticulosPintar.sort((a:any,b:any)=> b.idarticulo - a.idarticulo)
             }else if(filtro == "profile"){
                 this.tituloLista = 'Anuncios'
                 this.listaArticulosPintar = 

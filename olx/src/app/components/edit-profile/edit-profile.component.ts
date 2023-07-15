@@ -22,6 +22,10 @@ export class EditProfileComponent implements OnInit{
         this.usuarioEdit = { iduser,nombre, apellido, ubicacion,email , imagen,telefono } ;
         this.imgPreview = this.usuarioEdit.imagen
       })
+
+      var enlace = 'https://firebasestorage.googleapis.com/v0/b/psicologiaconleila.appspot.com/o/images%2Fnombrefoto.jpg?alt=media&token=43d0ab7b-1189-40b2-9653-ead4cc2eebc9';
+      var nombreFoto = enlace.substring(enlace.lastIndexOf('%2F') + 3, enlace.lastIndexOf('?alt'));
+      console.log(nombreFoto);
     })
   }
 
@@ -54,40 +58,46 @@ export class EditProfileComponent implements OnInit{
   estadoCargando = false
   imgPreview = ''
   cambiarFotoPerfil(event:any){
-
-    this.eliminarImg(this.usuario.imagen)
     const file = event.target.files[0]
+    console.log(file);
     this.estadoCargando = true
-    const imgRef = ref(this.storage, 'images/'+ new Date().getTime())
-    uploadBytes(imgRef, file).then(res =>{
-     this.imgPreview = 'https://firebasestorage.googleapis.com/v0/b/psicologiaconleila.appspot.com/o/images%2F'+ res.metadata.name+'?alt=media&token=43d0ab7b-1189-40b2-9653-ead4cc2eebc9'
-      this.estadoCargando = false
-      this.usuarioEdit.imagen = this.imgPreview
-
-  })
-  .catch(err =>{
-    this.estadoCargando = false
-      console.log(err);
-  })
+    if(file.size < 5000000){
+      this.eliminarImg(this.usuario.imagen)
+        const imgRef = ref(this.storage, 'images/'+ new Date().getTime())
+        uploadBytes(imgRef, file).then(res =>{
+        this.imgPreview = 'https://firebasestorage.googleapis.com/v0/b/psicologiaconleila.appspot.com/o/images%2F'+ res.metadata.name+'?alt=media&token=43d0ab7b-1189-40b2-9653-ead4cc2eebc9'
+            this.estadoCargando = false
+            this.usuarioEdit.imagen = this.imgPreview
+            this.us.obtenerUsuario(this.usuarioEdit.iduser).subscribe(user => {
+                let listaUser:any = user
+                this.usuario = listaUser[0]
+            });
+        })
+        .catch(err =>{
+          this.estadoCargando = false
+            console.log(err);
+            this.us.obtenerUsuario(this.usuarioEdit.iduser)
+        })
+    }else{
+      alert("Ups, Al parecer la imagen que intentas cargar pesa demasiado")
+    }
   }
 
 
-  eliminarImg(imgName: string) {
+  eliminarImg(imgUrl: string) {
     this.estadoCargando = true
+    let imgName = imgUrl.substring(imgUrl.lastIndexOf('%2F') + 3, imgUrl.lastIndexOf('?alt'));
     let imgPath = 'images/'+imgName
     const imgRef = ref(this.storage, imgPath);
     deleteObject(imgRef)
       .then(() => {
         console.log('Imagen eliminada con éxito:', imgPath);
         this.estadoCargando = false
-       
       })
       .catch(err => {
         this.estadoCargando = false
         console.error('Error al eliminar la imagen:', imgPath, err);
-        
-      
       });
   }
-
 }
+//falta que se actualicen los componentes solos

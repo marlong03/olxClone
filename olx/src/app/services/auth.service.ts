@@ -88,6 +88,8 @@ export class AuthService {
       setTimeout(()=>{
 
         localStorage.removeItem('user')
+        localStorage.removeItem('dataUser')
+
         this.router.navigate(['login'])
       },1500)
     }).catch(()=>{
