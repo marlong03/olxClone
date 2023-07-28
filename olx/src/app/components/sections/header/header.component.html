@@ -17,6 +17,11 @@
         </ul>
         <!-- <button type="button" class="btn btn-dark mx-2">Vender</button> -->
         <div class="d-flex alig-items-center justify-content-center">
+          <div class="d-flex  justify-content-center mt-1" *ngIf="cargandoCerrarSesion">
+            <div class="spinner-border" role="status">
+              <span class="sr-only"></span>
+            </div>
+          </div>
           <button type="button" class="btn btn-dark ms-3" [routerLink]="['/login']" *ngIf="!userLogged">Iniciar sesión</button>
           <button type="button" class="btn btn-outline-light ms-3" (click)="cerrarSesion()" *ngIf="userLogged">Cerrar sesión</button>
           <button type="button" class="btn btn-dark ms-3" *ngIf="userLogged" [routerLink]="['/item/new']">Vender</button>

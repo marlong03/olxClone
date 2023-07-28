@@ -30,12 +30,12 @@ export class AuthService {
 
     })
   }
-  resetPassword(){
-  /*   console.log(this.userData); */
-      console.log("holasds");
-      
-    sendPasswordResetEmail(this.auth,"marlongyes@gmail.com").then(() =>{
-      alert("SE HA ENVIADO RESET PASSWORD")
+  resetPassword(email:string){
+    sendPasswordResetEmail(this.auth,email).then(() =>{
+      alert("Por favor revisa tu correo, enviamos un link para restablecer contraseña")
+    })
+    .catch(err =>{
+      alert("Ups! Lo sentimos no te encontramos, Registrate por favor")
     })
   }
   setUserData(user:any){
@@ -59,9 +59,7 @@ export class AuthService {
     .then((result:any) =>{
       this.setUserData(result.user)
       this.afAuth.authState.subscribe( (user:any)=>{
-        if(user){
-          this.router.navigate(['home']);
-        }
+        return true
       })
     }).catch((err:any)=>{
       alert("MENSAJE ERROR")
@@ -84,14 +82,7 @@ export class AuthService {
   logout(){
     return this.afAuth.signOut()
     .then(()=>{
-      alert("MENSAJE SUCCESS")
-      setTimeout(()=>{
-
-        localStorage.removeItem('user')
-        localStorage.removeItem('dataUser')
-
-        this.router.navigate(['login'])
-      },1500)
+     
     }).catch(()=>{
       alert("MENSAJE ERROR")
 

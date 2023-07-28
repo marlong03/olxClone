@@ -17,7 +17,11 @@
        
         <input type="button" class="btn btn-light   m-2 p-1 px-3 btn-reset-password" value="Restablecer contraseña" (click)="resetPassword()">
         <button type="submit" class="btn btn-danger w-75 py-3 my-2" (click)="login(loginUser)">Iniciar sesión</button>
-        
+        <div class="d-flex  justify-content-center mt-1" *ngIf="cargandoInicioSesion">
+          <div class="spinner-border" role="status">
+            <span class="sr-only"></span>
+          </div>
+        </div>
       </form>
 </div>
 <div class="mt-3">

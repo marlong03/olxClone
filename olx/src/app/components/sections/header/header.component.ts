@@ -11,8 +11,10 @@ import { CategoriaService } from 'src/app/services/categoria.service';
 export class HeaderComponent implements OnInit {
   constructor(private cs:CategoriaService,
               private authService:AuthService,
-              private router:Router){}
-
+              private router:Router,
+              ){}
+ //eliminar cookies
+ 
   ngOnInit(): void {
     this.obtenerCategorias()
     
@@ -20,6 +22,7 @@ export class HeaderComponent implements OnInit {
       this.userLogged = true
     }
   }
+  cargandoCerrarSesion = false
   userLogged = false
   usuarioLocal = JSON.parse(localStorage.getItem('dataUser') || '[]')
   @Output() valueChanged = new EventEmitter<string>();
@@ -46,9 +49,19 @@ export class HeaderComponent implements OnInit {
     
   }
   cerrarSesion(){
-    this.authService.logout();
-    this.router.navigate(['/login'])
-    localStorage.removeItem('dataUser')
+    this.cargandoCerrarSesion = true
+    this.authService.logout().then(()=>{
+      localStorage.removeItem('user')
+      localStorage.removeItem('dataUser')
+      localStorage.clear()
+
+      setTimeout(()=>{
+        this.cargandoCerrarSesion = false
+        this.router.navigate(['login'])
+
+      },1500)
+
+    })
   }
   
 }
