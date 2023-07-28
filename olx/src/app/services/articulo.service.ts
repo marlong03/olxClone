@@ -6,18 +6,18 @@ import { HttpClient } from "@angular/common/http";
 export class ArticuloService {
 
   constructor(private http:HttpClient) { }
-
+  urlRaiz = "https://olx-node-sx91.onrender.com/"
   obtenerArticulosDB(){
-    return  this.http.get('http://localhost:3000/articulo')
+    return  this.http.get(this.urlRaiz +'articulo')
   }
   obtenerArticuloDB(id:number){
-    return  this.http.get('http://localhost:3000/articulo/'+id)
+    return  this.http.get(this.urlRaiz +'articulo/'+id)
   }
   editarArticuloDB(articulo:any){
-    return  this.http.put('http://localhost:3000/articulo/update/'+articulo.idarticulo,articulo)
+    return  this.http.put(this.urlRaiz +'articulo/update/'+articulo.idarticulo,articulo)
   }
   crearArticulo(articulo:any){
-    return this.http.post('http://localhost:3000/articulo/new',articulo)
+    return this.http.post(this.urlRaiz +'articulo/new',articulo)
   }
   
 }

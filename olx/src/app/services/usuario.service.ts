@@ -6,18 +6,18 @@ import { HttpClient } from "@angular/common/http";
 export class UsuarioService {
 
   constructor(private http:HttpClient) { }
-
+  urlRaiz = "https://olx-node-sx91.onrender.com/"
   obtenerUsuario(id:number){
-    return this.http.get('http://localhost:3000/usuario/'+id)
+    return this.http.get(this.urlRaiz +'usuario/'+id)
   }
   obtenerUsuarioPorEmail(email:string){
-    return this.http.get('http://localhost:3000/usuario/email/'+email)
+    return this.http.get(this.urlRaiz +'usuario/email/'+email)
   }
   editarUsuario(usuario:any){
-    return this.http.put('http://localhost:3000/usuario/update/'+usuario.iduser,usuario)
+    return this.http.put(this.urlRaiz +'usuario/update/'+usuario.iduser,usuario)
   }
   cambiarPassword(id:any,password:any){
-    return this.http.put('http://localhost:3000/usuario/update/password/'+id,password)
+    return this.http.put(this.urlRaiz +'usuario/update/password/'+id,password)
   }
 
 }
