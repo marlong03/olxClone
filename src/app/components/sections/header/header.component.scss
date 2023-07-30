@@ -1,0 +1,16 @@
+.cursor-pointer{
+    cursor: pointer;
+}
+.li_category:hover{
+    animation: listar .1s linear;
+    margin-left:10px;
+    background-color: #dcdcdc;
+}
+@keyframes listar {
+    0%{margin-left:0}
+    50%{margin-left:2px}
+}
+.imgProfileHeader{
+    width: 30px;
+    border-radius: 100px;
+}

@@ -1,0 +1,15 @@
+.img__profile{
+    width: 85px;
+    height: 85px;
+    box-sizing: border-box;
+    object-fit: cover;
+    border-radius: 100%;
+}
+.dropdown-menu li:hover, .dropdown-item:hover{
+    cursor: pointer;
+    background-color: #d4d4d4;
+}
+.title__section{
+    border-bottom: 2px solid #282828;
+    padding-bottom: 5px;
+}
