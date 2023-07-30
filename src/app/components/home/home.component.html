@@ -1,0 +1,21 @@
+<app-header></app-header>
+    <div class="container-fluid bg-dark">
+        <h1 class="text-center py-5 text-light ">MercaTwo</h1>
+    </div>
+    
+    <div class="container-fluid">
+        <!-- 
+            - La idea es pasarle a app-list-item parametro como:
+                - Cantidad
+                - Filtro por palabras
+                - Filtro por precio
+                - Filtro por categoria
+                - Filtro por Famoso
+                - Filtro por mas nuevo
+        
+         -->
+         
+        <app-list-items [inputHome]="inputHome"></app-list-items>
+    </div>
+
+<app-footer></app-footer>
