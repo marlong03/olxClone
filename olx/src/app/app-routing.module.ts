@@ -10,6 +10,7 @@ import { CreateItemComponent } from './components/create-item/create-item.compon
 import { CategoryComponent } from './components/category/category.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { EditItemComponent } from './components/edit-item/edit-item.component';
+import { permisosGuard } from './guards/permisos.guard';
 
 const routes: Routes = [
 
@@ -18,7 +19,7 @@ const routes: Routes = [
 
   { path: 'register', component: RegisterComponent},
   { path: 'profile/:id', component: ProfileComponent},
-  { path: 'profile/edit/:id', component: EditProfileComponent},
+  { path: 'profile/edit/:id', component: EditProfileComponent,canActivate:[permisosGuard] },
 
   { path: 'item/new', component: CreateItemComponent},
 /*   { path: 'item/:id', component: ItemComponent}, */

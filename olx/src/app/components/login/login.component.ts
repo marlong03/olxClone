@@ -21,7 +21,11 @@ export class LoginComponent {
 
       this.cargandoInicioSesion = true
       this.authService.login(loginUser.email,loginUser.password).then(res =>{
+
+        console.log(res);
+        if(res == true){
        this.us.obtenerUsuarioPorEmail(loginUser.email).subscribe(user =>{
+
          if(user){
             
             localStorage.setItem('dataUser',JSON.stringify(user))
@@ -31,8 +35,15 @@ export class LoginComponent {
               this.route.navigate(['home'])
             },1000)
           }
-       })
+          
+        })
+      }else if(res == false){
+        this.cargandoInicioSesion = false
+        alert("Revisa por favor los datos ingresados")   
+      }
        
+      }).catch(()=>{
+        alert("fuerraa")
       })
     }else{
       this.cargandoInicioSesion = false

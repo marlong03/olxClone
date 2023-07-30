@@ -25,6 +25,7 @@ export class ItemComponent implements OnInit {
   articulo:any
    obtenerItem(id:number){
     this.as.obtenerArticuloDB(id).subscribe((articulo)=>{
+      console.log();
       
       let listaArticulos:any = articulo
       if(listaArticulos.length == 0){

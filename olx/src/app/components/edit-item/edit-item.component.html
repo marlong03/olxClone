@@ -91,8 +91,16 @@
     </aside>
     <div class="col-7 d-flex  mx-auto alig-items-center flex-column "  >
         <div class="mt-4 mb-3 d-flex justify-content-between">
-            <h3>Vista previa</h3>
-            <input type="button" class="btn btn-dark px-4" value="Guardar" (click)="editarArticulo()">
+            <div>
+
+                <h3>Vista previa</h3>
+            </div>
+            <div>
+
+                <input type="button" class="btn btn-outline-danger px-4 mx-2" value="Eliminar articulo" (click)="eliminarArticulo()">
+                <input type="button" class="btn btn-dark px-4" value="Guardar" (click)="editarArticulo()">
+            </div>
+
         </div>
         <div class="container border border-secondary  mx-auto  p-3 d-flex justify-content-center rounded ">
             <div class="col-6 me-2 flex-column">
@@ -144,7 +152,7 @@
                     </div>
                     <div>
                         <h5 class="text-center" >{{articulo.user_iduser.nombre}}</h5>
-                        <input type="button" value="Ver perfil" class="btn btn-outline-dark p-2 w-100 mt-3 " [routerLink]="['/profile']">
+                        <input type="button" value="Ver perfil" class="btn btn-outline-dark p-2 w-100 mt-3 " [routerLink]="['/profile/'+articulo.user_iduser.id]">
                     </div>
                 </div>
             </div>

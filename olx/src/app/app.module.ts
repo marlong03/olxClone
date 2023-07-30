@@ -17,6 +17,7 @@ import { CreateItemComponent } from './components/create-item/create-item.compon
 import { HttpClientModule } from '@angular/common/http';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { CookieService } from 'ngx-cookie-service';
 
 /* Auth */
 import { AngularFireModule } from '@angular/fire/compat'
@@ -58,7 +59,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     provideStorage(() => getStorage()),
 
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

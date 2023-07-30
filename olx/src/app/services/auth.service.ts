@@ -5,6 +5,7 @@ import { getAuth, sendPasswordResetEmail} from 'firebase/auth'
 import { AngularFirestore , AngularFirestoreDocument } from "@angular/fire/compat/firestore";
 import { Router } from "@angular/router";
 import { User } from '../models/user';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +18,14 @@ export class AuthService {
     private afs:AngularFirestore,
     private afAuth:AngularFireAuth,
     private router:Router,
+    private cs:CookieService
   ){ 
     this.afAuth.authState.subscribe((user:any) =>{
       if(user){
         this.userData = user;
         localStorage.setItem('user',JSON.stringify(this.userData))
         JSON.parse(localStorage.getItem('user')!)
+        
       }else{
           localStorage.setItem('user','null')
           JSON.parse(localStorage.getItem('user')!)
@@ -59,10 +62,11 @@ export class AuthService {
     .then((result:any) =>{
       this.setUserData(result.user)
       this.afAuth.authState.subscribe( (user:any)=>{
-        return true
+        return user
       })
+      return true
     }).catch((err:any)=>{
-      alert("MENSAJE ERROR")
+      return false
     })
   }
 
@@ -82,7 +86,7 @@ export class AuthService {
   logout(){
     return this.afAuth.signOut()
     .then(()=>{
-     
+      this.cs.deleteAll()
     }).catch(()=>{
       alert("MENSAJE ERROR")
 

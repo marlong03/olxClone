@@ -19,5 +19,8 @@ export class UsuarioService {
   cambiarPassword(id:any,password:any){
     return this.http.put(this.urlRaiz +'usuario/update/password/'+id,password)
   }
+  crearUsuario(user:any){
+    return this.http.post(this.urlRaiz +'usuario/new',user)
+  }
 
 }

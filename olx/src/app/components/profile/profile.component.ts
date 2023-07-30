@@ -24,19 +24,22 @@ export class ProfileComponent implements OnInit {
           this.permiseEdit = false
         }
       }
+      if(id != this.idEditPerfil){
+        this.router.navigate(['home'])
+      }
     })
   }
   permiseEdit = false
   userLogged = false
   usuarioLocal = JSON.parse(localStorage.getItem('dataUser') || '[]')
-  idEditPerfil = 1;
+  idEditPerfil = this.usuarioLocal[0].iduser;
   usuario:any
   obtenerUsuario(id:number){
     this.us.obtenerUsuario(id).subscribe((usuario:any)=>{
       let listaUsuarios:any = usuario
 
       if(listaUsuarios.length == 0){
-        this.router.navigate([''])
+        this.router.navigate(['home'])
     }else{
 
       this.usuario = listaUsuarios[0]
@@ -44,6 +47,7 @@ export class ProfileComponent implements OnInit {
     })
     
   }
+
   
   
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticuloService } from 'src/app/services/articulo.service';
 
 @Component({
@@ -9,7 +9,8 @@ import { ArticuloService } from 'src/app/services/articulo.service';
 })
 export class EditItemComponent implements OnInit {
   constructor(private route:ActivatedRoute,
-              private as:ArticuloService){}
+              private as:ArticuloService,
+              private router:Router){}
   ngOnInit(): void {
       this.route.params.subscribe(parametros =>{
           let {id} = parametros
@@ -20,18 +21,24 @@ export class EditItemComponent implements OnInit {
             const { idarticulo, titulo, precio, fecha, situacion, descripcion, imagen, estado } = this.articulo;
             this.articuloEdit = { idarticulo, titulo, precio, fecha, situacion, descripcion, imagen, estado };
             console.log(this.articuloEdit);
-            
+            this.creadorArticulo = listaArticulos[0].user_iduser.id 
           })
+        /*   if(this.creadorArticulo != this.idEditPerfil){
+            this.router.navigate(['home'])
+          } */
+
       })
   }
-    
+  usuarioLocal = JSON.parse(localStorage.getItem('dataUser') || '[]')
+  idEditPerfil = this.usuarioLocal[0].iduser;
+    creadorArticulo = 0
     articulo:any = {}
     articuloEdit:any = {
       idarticulo: this.articulo.idarticulo,
       titulo: this.articulo.titulo,
       precio: this.articulo.precio,
       descripcion: this.articulo.descripcion,
-      fecha: this.articulo.fecha,
+      fecha: "2023-01-01",
       situacion: this.articulo.situacion,
       imagen: this.articulo.imagen,
       categoria_idcategoria:1,
@@ -52,6 +59,11 @@ export class EditItemComponent implements OnInit {
       "estado": "nuevo"
     } */
     editarArticulo(){
+      this.articuloEdit.fecha = "2023-01-01"
+      this.articuloEdit.categoria_idcategoria=1,
+      this.articuloEdit.user_iduser=1,
+      console.log(this.articuloEdit);
+      
       this.as.editarArticuloDB(this.articuloEdit).subscribe(res =>{
         console.log(res);
         alert("se logro actualizar el articulo")
@@ -61,5 +73,19 @@ export class EditItemComponent implements OnInit {
       })
       
 
+    }
+    eliminarArticulo(){
+      let respuesta = prompt("seguro quieres eliminar el articulo? (si | no)")
+      if(respuesta == "si"){
+          this.as.eliminarArticulo(this.articulo.idarticulo).subscribe(()=>{
+            alert("se ha eliminado el articulo correctamente")
+            setTimeout(()=>{
+              this.router.navigate(['/home'])
+            },2000)
+          })
+
+      }else{
+        alert("Casi borras el articulo")
+      }
     }
 }

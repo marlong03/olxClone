@@ -19,5 +19,8 @@ export class ArticuloService {
   crearArticulo(articulo:any){
     return this.http.post(this.urlRaiz +'articulo/new',articulo)
   }
+  eliminarArticulo(id:any){
+    return this.http.delete(this.urlRaiz +'articulo/delete/'+id)
+  }
   
 }

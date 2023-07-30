@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Storage, ref, uploadBytes, listAll , getDownloadURL,deleteObject} from '@angular/fire/storage'
 @Component({
@@ -10,7 +10,8 @@ import { Storage, ref, uploadBytes, listAll , getDownloadURL,deleteObject} from 
 export class EditProfileComponent implements OnInit{
   constructor( private route:ActivatedRoute,
                 private us:UsuarioService,
-                private storage:Storage){}
+                private storage:Storage,
+                private router:Router){}
 
   ngOnInit(): void {
     this.route.params.subscribe(parametros =>{
@@ -26,9 +27,13 @@ export class EditProfileComponent implements OnInit{
       /* var enlace = 'https://firebasestorage.googleapis.com/v0/b/servicio1-bb772.appspot.com/o/images%2F'++'?alt=media&token=f9966959-bb3f-4636-8eeb-de87626e36c2';
       var nombreFoto = enlace.substring(enlace.lastIndexOf('%2F') + 3, enlace.lastIndexOf('?alt'));
       console.log(nombreFoto); */
+      if(id != this.idEditPerfil){
+        this.router.navigate(['home'])
+      }
     })
   }
-
+  usuarioLocal = JSON.parse(localStorage.getItem('dataUser') || '[]')
+  idEditPerfil = this.usuarioLocal[0].iduser;
   usuario:any =  {}
   usuarioEdit:any =  {}
   editarUsuario(){

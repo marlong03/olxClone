@@ -37,7 +37,7 @@ export class CreateItemComponent implements OnInit {
       titulo: "",
       precio: "0",
       descripcion: "",
-      fecha: new Date().getTime(),
+      fecha:"2022-01-01" , /* new Date(Date.now()).toLocaleDateString() */
       situacion:"Disponible" ,
       imagen: "",
       categoria_idcategoria:0,
@@ -46,7 +46,7 @@ export class CreateItemComponent implements OnInit {
     }
 
     estadoCargando = false
-    imgVistaPrevia = 'assets/imgs/imgFondo.jpg'
+    imgVistaPrevia = 'assets/imgs/no-image.png'
     cargarImg(event:any){
       const file = event.target.files[0]
       console.log(file);
@@ -55,7 +55,7 @@ export class CreateItemComponent implements OnInit {
        /*  this.eliminarImg(this.usuario.imagen) */
           const imgRef = ref(this.storage, 'images/'+ new Date().getTime())
           uploadBytes(imgRef, file).then((res:any) =>{
-          this.imgVistaPrevia = 'https://firebasestorage.googleapis.com/v0/b/psicologiaconleila.appspot.com/o/images%2F'+ res.metadata.name+'?alt=media&token=43d0ab7b-1189-40b2-9653-ead4cc2eebc9'
+          this.imgVistaPrevia = 'https://firebasestorage.googleapis.com/v0/b/servicio1-bb772.appspot.com/o/images%2F'+ res.metadata.name+'?alt=media&token=0a8f8d75-9e57-4ebc-821f-827b2595bd16'
           this.articuloNew.imagen = this.imgVistaPrevia
           this.estadoCargando = false
               /* this.us.obtenerUsuario(this.usuarioEdit.iduser).subscribe(user => {
@@ -89,14 +89,12 @@ export class CreateItemComponent implements OnInit {
       
     }
 
-
     categoriaSeleccionada: any = ""
     seleccionarCategoria(categoria:any) {
       this.articuloNew.categoria_idcategoria = categoria.idcategoria;
       this.categoriaSeleccionada = categoria.nombre
       console.log('Categoría seleccionada:', categoria.idcategoria);
     }
-
 
     estadoSeleccionado = ""
     seleccionarEstado(estado:any) {
