@@ -6,3 +6,4 @@ Backend - Nodejs
 Frontend - Angular
 Storage - Firebase, DB4FREE
 Publicación proyecto - Render, Firebase Hosting
+## Proyecto en proceso
