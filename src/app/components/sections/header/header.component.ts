@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
@@ -62,6 +63,9 @@ export class HeaderComponent implements OnInit {
       },1500)
 
     })
+  }
+  click(){
+    Swal.fire("hola")
   }
   
 }

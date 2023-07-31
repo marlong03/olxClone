@@ -41,7 +41,7 @@ export class ListItemsComponent implements OnInit{
         this.as.obtenerArticulosDB().subscribe( (articulos) => {
             this.listaArticulosPintar = articulos
             if(filtro == "null"){
-                this.tituloLista = 'Ultimos anuncios'
+                this.tituloLista = 'Ultímos anuncios'
                 this.listaArticulosPintar = articulos
                 this.listaArticulosPintar = this.listaArticulosPintar.sort((a:any,b:any)=> b.idarticulo - a.idarticulo)
             }else if(filtro == "profile"){
@@ -57,7 +57,7 @@ export class ListItemsComponent implements OnInit{
                     if(res == false){
                         this.router.navigate([''])
                     }else{
-                        this.tituloLista = 'Categoria '+ this.valorDelPadre
+                        this.tituloLista = 'Categoría '+ this.valorDelPadre
                         this.listaArticulosPintar = 
                         this.listaArticulosPintar
                           .filter((articulo:any) =>articulo.categoria_idcategoria.nombre == this.valorDelPadre)

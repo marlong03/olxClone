@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params)=>{
       let {id} = params
-      console.log(id);
+      console.log(params);
       this.obtenerUsuario(id)
       if(this.usuarioLocal.length == 1){
         this.userLogged = true
@@ -23,31 +23,35 @@ export class ProfileComponent implements OnInit {
         }else{
           this.permiseEdit = false
         }
+      }else{
+        this.userLogged = true
       }
-      if(id != this.idEditPerfil){
+      /* if(id != this.idEditPerfil){
         this.router.navigate(['home'])
-      }
+      } */
+     
     })
   }
   permiseEdit = false
   userLogged = false
   usuarioLocal = JSON.parse(localStorage.getItem('dataUser') || '[]')
-  idEditPerfil = this.usuarioLocal[0].iduser;
+  idEditPerfil = 0 ;
   usuario:any
-  obtenerUsuario(id:number){
-    this.us.obtenerUsuario(id).subscribe((usuario:any)=>{
+  obtenerUsuario(id:any){
+    this.us.obtenerUsuario(parseInt(id)).subscribe((usuario:any)=>{
       let listaUsuarios:any = usuario
-
+      this.idEditPerfil = listaUsuarios[0].iduser
+      console.log(listaUsuarios[0].iduser);
+      
       if(listaUsuarios.length == 0){
         this.router.navigate(['home'])
     }else{
 
       this.usuario = listaUsuarios[0]
+      this.idEditPerfil = listaUsuarios[0].iduser
     }
     })
     
   }
-
-  
   
 }

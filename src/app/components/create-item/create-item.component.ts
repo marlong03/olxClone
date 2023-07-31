@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ArticuloService } from 'src/app/services/articulo.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { Storage, ref, uploadBytes, listAll , getDownloadURL,deleteObject} from '@angular/fire/storage'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-item',
@@ -78,12 +79,27 @@ export class CreateItemComponent implements OnInit {
         this.articuloNew.imagen != ""){
           
           this.as.crearArticulo(this.articuloNew).subscribe(res =>{
-            alert("se haa creado un nuevo articulo")
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Has creado un nuevo articulo',
+              showConfirmButton: false,
+              timer: 1000
+            }).then(()=>{
+              this.router.navigate(['home'])
+            })
             console.log(res);
             
           })
         }else{
-          alert("Todavia faltan datos por llenar")
+          Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            title: 'Todavia faltan datos por llenar',
+            showConfirmButton: false,
+            timer: 1000
+          })
+
         }
       console.log(this.articuloNew);
       

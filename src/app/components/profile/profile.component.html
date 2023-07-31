@@ -1,15 +1,15 @@
 <app-header></app-header>
 
-<div class="container-fluid d-flex" *ngIf="usuario">
-
-    <aside class="col-3 px-3 py-1 px-3 me-3 mt-3  d-flex   flex-column border-end border-secondary-subtle  ">
+<div class="container-fluid d-md-flex " *ngIf="usuario">
+  <div class="row">
+  <aside class="col-sm  px-3 py-1 px-3 me-3 mt-3  d-flex   flex-column border-end border-secondary-subtle  ">
         <div class="container-fluid pt-2 pb-4 px-0">
           <input type="button" class="btn btn-dark  " value="⇐ Volver" [routerLink]="['/home']">
         </div>
-        <div class="d-flex justify-content-center flex-column border-">
+        <div class="d-sm-flex justify-content-center flex-md-column border-">
             <div class="d-flex align-items-center flex-column">
                 <img src="{{usuario.imagen}}" alt="" class="img__profile me-3 border border-secondary ">
-                <h4 class="mx-2 my-3">{{usuario.nombre.split(' ')[0] +' '+ usuario.apellido.split(' ')[0]  }}</h4>
+                <h4 class="mx-2 my-3 text-capitalize">{{usuario.nombre.split(' ')[0] +' '+ usuario.apellido.split(' ')[0]  }}</h4>
             </div>
             <div>
                 <table class="table">
@@ -19,12 +19,12 @@
                         <td>{{usuario.email}}</td>
                       </tr>
                       <tr class="d-flex flex-wrap">
-                        <th scope="row">Telefono</th>
+                        <th scope="row">Teléfono</th>
                         <td>{{usuario.telefono}}</td>
                       </tr>
                       <tr class="d-flex flex-wrap"> 
                         <th scope="row">Ubicación</th>
-                        <td>{{usuario.ubicacion}}</td>
+                        <td class="text-capitalize">{{usuario.ubicacion}}</td>
                       </tr>
                       <tr class="d-flex flex-wrap"> 
                         <td ><input type="button" value="Editar Perfil" class="py-3 px-5 btn btn-danger text-light " [routerLink]="['/profile/edit/'+idEditPerfil]" *ngIf="permiseEdit"></td>
@@ -34,8 +34,13 @@
             </div>
         </div>   
     </aside>
-    <div>
+  </div>  
+
+    <div class="row"> 
+
+      <div class="col-sm">
         <app-list-items [inputIdUserProfile]="usuario.iduser"></app-list-items>
+      </div>
     </div>
 </div>
 <app-footer></app-footer>

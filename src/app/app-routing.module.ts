@@ -19,7 +19,7 @@ const routes: Routes = [
 
   { path: 'register', component: RegisterComponent},
   { path: 'profile/:id', component: ProfileComponent},
-  { path: 'profile/edit/:id', component: EditProfileComponent,canActivate:[permisosGuard] },
+  { path: 'profile/edit/:id', component: EditProfileComponent,/* canActivate:[permisosGuard] */ },
 
   { path: 'item/new', component: CreateItemComponent},
 /*   { path: 'item/:id', component: ItemComponent}, */

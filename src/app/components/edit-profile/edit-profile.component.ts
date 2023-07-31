@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Storage, ref, uploadBytes, listAll , getDownloadURL,deleteObject} from '@angular/fire/storage'
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -16,7 +17,11 @@ export class EditProfileComponent implements OnInit{
   ngOnInit(): void {
     this.route.params.subscribe(parametros =>{
       let {id} = parametros
+      console.log(parametros);
+      
       this.us.obtenerUsuario(id).subscribe(user =>{
+        console.log("Se obtuvo un usuario");
+        
         let listaUser:any = user
         this.usuario = listaUser[0]
         const { iduser,nombre, apellido, ubicacion,email , imagen,telefono } = this.usuario;
@@ -27,9 +32,15 @@ export class EditProfileComponent implements OnInit{
       /* var enlace = 'https://firebasestorage.googleapis.com/v0/b/servicio1-bb772.appspot.com/o/images%2F'++'?alt=media&token=f9966959-bb3f-4636-8eeb-de87626e36c2';
       var nombreFoto = enlace.substring(enlace.lastIndexOf('%2F') + 3, enlace.lastIndexOf('?alt'));
       console.log(nombreFoto); */
-      if(id != this.idEditPerfil){
+     /*  if(id != this.idEditPerfil){
+        this.router.navigate(['home'])
+      } */
+      console.log(id);
+      console.log(this.idEditPerfil);
+      if(parseInt(id) != this.idEditPerfil){
         this.router.navigate(['home'])
       }
+      
     })
   }
   usuarioLocal = JSON.parse(localStorage.getItem('dataUser') || '[]')
@@ -38,34 +49,33 @@ export class EditProfileComponent implements OnInit{
   usuarioEdit:any =  {}
   editarUsuario(){
     console.log(this.usuarioEdit);
-    this.eliminarImg(this.usuario.imagen)
+    
     this.us.editarUsuario(this.usuarioEdit).subscribe(res =>{
-      this.us.obtenerUsuario(this.usuarioEdit.iduser)
+      this.us.obtenerUsuario(this.usuarioEdit.iduser).subscribe(()=>{
+     
+      })
 
       
     });
+    //
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Has actualizado tu perfil',
+      showConfirmButton: false,
+      timer: 1000
+    }).then(()=>{
+      this.router.navigate(['/profile/'+this.idEditPerfil])
+    })
   }
 
-  passwordAnterior = ''
-  passwordNueva = ''
-  cambiarPassword(){
-    if(this.passwordAnterior == this.usuario.password){
-      this.us.cambiarPassword(this.usuario.iduser,{password:this.passwordNueva}).subscribe((res:any) =>{
-        alert("Nueva contraseña actualizada")
-      })
-      alert("Nueva contraseña actualizada")
-      this.us.obtenerUsuario(this.usuario.iduser)
-      this.passwordAnterior = ''
-      this.passwordNueva = ''
-    }else{
-      alert("ups la contraseña anterior es incorrecta")
-    }
-  }
+  
 
 
   estadoCargando = false
   imgPreview = ''
   cambiarFotoPerfil(event:any){
+    this.eliminarImg(this.usuario.imagen)
     const file = event.target.files[0]
     console.log(file);
     this.estadoCargando = true
@@ -76,6 +86,7 @@ export class EditProfileComponent implements OnInit{
             this.estadoCargando = false
             this.usuarioEdit.imagen = this.imgPreview
             this.us.obtenerUsuario(this.usuarioEdit.iduser).subscribe(user => {
+              this.editarUsuario()
                 let listaUser:any = user
                 this.usuario = listaUser[0]
             });
@@ -86,7 +97,14 @@ export class EditProfileComponent implements OnInit{
             this.us.obtenerUsuario(this.usuarioEdit.iduser)
         })
     }else{
-      alert("Ups, Al parecer la imagen que intentas cargar pesa demasiado")
+      //
+      Swal.fire({
+        position: 'top-end',
+        icon: 'warning',
+        title: 'No pudimos cargar tu imagen, pesa demaciado',
+        showConfirmButton: false,
+        timer: 1000
+      })
     }
   }
 

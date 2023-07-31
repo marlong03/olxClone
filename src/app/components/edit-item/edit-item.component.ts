@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticuloService } from 'src/app/services/articulo.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edir-item',
@@ -22,12 +23,22 @@ export class EditItemComponent implements OnInit {
             this.articuloEdit = { idarticulo, titulo, precio, fecha, situacion, descripcion, imagen, estado };
             console.log(this.articuloEdit);
             this.creadorArticulo = listaArticulos[0].user_iduser.id 
+          if(parseInt(this.articulo.user_iduser.id) != this.idEditPerfil){
+            this.router.navigate(['home'])
+          }
           })
         /*   if(this.creadorArticulo != this.idEditPerfil){
             this.router.navigate(['home'])
           } */
+          
+          
+          
+         
+          
 
       })
+     
+     
   }
   usuarioLocal = JSON.parse(localStorage.getItem('dataUser') || '[]')
   idEditPerfil = this.usuarioLocal[0].iduser;
@@ -61,31 +72,50 @@ export class EditItemComponent implements OnInit {
     editarArticulo(){
       this.articuloEdit.fecha = "2023-01-01"
       this.articuloEdit.categoria_idcategoria=1,
-      this.articuloEdit.user_iduser=1,
+      this.articuloEdit.user_iduser=this.idEditPerfil,
       console.log(this.articuloEdit);
       
       this.as.editarArticuloDB(this.articuloEdit).subscribe(res =>{
         console.log(res);
-        alert("se logro actualizar el articulo")
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Has actualizado el artículo',
+          showConfirmButton: false,
+          timer: 1000
+        }).then(()=>{
+          this.router.navigate(['/item/'+this.articuloEdit.idarticulo])
+        })
         this.as.obtenerArticuloDB(this.articulo.idarticulo)
 
         
       })
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Has actualizado el artículo',
+        showConfirmButton: false,
+        timer: 1000
+      }).then(()=>{
+        this.router.navigate(['/item/'+this.articuloEdit.idarticulo])
+      })
+      this.as.obtenerArticuloDB(this.articulo.idarticulo)
       
 
     }
     eliminarArticulo(){
-      let respuesta = prompt("seguro quieres eliminar el articulo? (si | no)")
-      if(respuesta == "si"){
+      Swal.fire({
+        title: '¿Seguro quieres eliminar el artículo?',
+        showCancelButton: true,
+        confirmButtonText: 'Eliminar articulo',
+      }).then((result) => {
+        if (result.isConfirmed) {
           this.as.eliminarArticulo(this.articulo.idarticulo).subscribe(()=>{
-            alert("se ha eliminado el articulo correctamente")
-            setTimeout(()=>{
-              this.router.navigate(['/home'])
-            },2000)
-          })
-
-      }else{
-        alert("Casi borras el articulo")
-      }
+            Swal.fire('Has eliminado el artículo', '', 'success').then(()=>{
+              this.router.navigate(['home'])
+            })
+           })
+        } 
+      })
     }
 }

@@ -22,19 +22,18 @@
   
     <div class="col-md-6">
       <select id="inputState" class="form-select border border-secondary mx-2" name="ubicacion" [(ngModel)]="this.datesUserDB.ubicacion">
-        <option selected>Ubicacion</option>
-        <option *ngFor="let pais of paises">{{pais}}</option>
+        <option *ngFor="let pais of paises" class="text-capitalize">{{pais}}</option>
       </select>
     </div>
     
-    <div class="col-12">
+  <!--   <div class="col-12">
       <div class="form-check">
         <input type="checkbox" class="form-check-input border border-secondary mx-1" id="exampleCheck1">
         <label class="form-check-label" for="gridCheck">
           Acepto politicas
         </label>
       </div>
-    </div>
+    </div> -->
     <div class="col-12">
       <button type="submit" class="btn btn-danger p-3 w-100 mb-4" (click)="registerDB()" >Registrarme</button>
     </div>

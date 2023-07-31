@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -39,25 +40,52 @@ export class LoginComponent {
         })
       }else if(res == false){
         this.cargandoInicioSesion = false
-        alert("Revisa por favor los datos ingresados")   
+        //
+     
+      Swal.fire({
+        position: 'top-end',
+        icon: 'warning',
+        title: 'Revisa por favor los datos ingresados',
+        showConfirmButton: false,
+        timer: 1000
+      })
       }
        
       }).catch(()=>{
-        alert("fuerraa")
+        Swal.fire({
+          position: 'top-end',
+          icon: 'warning',
+          title: 'Lo sentimos, no fue posible iniciar sesíon',
+          showConfirmButton: false,
+          timer: 1000
+        })
       })
     }else{
       this.cargandoInicioSesion = false
-      alert("valida los datos nuevamente por favor")
+      Swal.fire({
+        position: 'top-end',
+        icon: 'warning',
+        title: 'Revisa por favor los datos ingresados',
+        showConfirmButton: false,
+        timer: 1000
+      })
+      
 
     }
 
     }
-    resetPassword(){
-      let email:string  = prompt('¿Olvidaste tu contraseña? Introduce un email registrado por favor') || ''
-      if(email != '' && email.includes('@') && email.includes('.')){
-        this.authService.resetPassword(email)
-      }else{
-        alert("Por favor introduce un correo valido")
-      }
+    async resetPassword(){
+      
+        const { value: email } = await Swal.fire({
+          title: 'Por favor introduce un correo registrado',
+          input: 'email',
+          inputLabel: 'Correo registrado',
+          inputPlaceholder: 'Correo registrado'
+        })
+        
+        if (email) {
+          this.authService.resetPassword(email)
+          Swal.fire(`Hemos enviado cambio de contraseña al correo: ${email}`)
+        }
     }
 }

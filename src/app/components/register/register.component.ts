@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +11,8 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class RegisterComponent {
   constructor(private authService:AuthService,
-              private us:UsuarioService){}
+              private us:UsuarioService,
+              private router:Router){}
   registerUser:any = {
     email:'',
     password:''
@@ -21,15 +24,33 @@ export class RegisterComponent {
       this.us.crearUsuario(this.datesUserDB).subscribe((x)=>{
         this.authService.register(this.datesUserDB.email,this.datesUserDB.password).then((res)=>{
           console.log(res);
-          alert("se creo tu usuario correctamente")
+         
         }).catch(err=>{
-          alert("no se pudo crear el usuario para autenticar")
+          
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Lo sentimos no fue posible crear tu usuario',
+            showConfirmButton: false,
+            timer: 1000
+          }).then(()=>{
+            this.router.navigate(['register'])
+        })
+
         })
         console.log(x);
       })
       return true
     }else{
-      alert("lo sentimos no fue posible crear el usuario")
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Lo sentimos no fue posible crear tu usuario',
+        showConfirmButton: false,
+        timer: 1000
+      }).then(()=>{
+        this.router.navigate(['register'])
+    })
       return false
     }
     
@@ -43,12 +64,12 @@ export class RegisterComponent {
     
     }) */
   }
-  paises = ["bogotá","bucaramanga","rio negro","medellin","la vega"]
+  paises = ["bogotá","bucaramanga","rio negro","medellin","la vega","tunja","villavicencio","valledupar","cartagena","santa marta"]
   datesUserDB:any = {
     "iduser": 0,
     "nombre": "",
     "apellido": "",
-    "ubicacion": "",
+    "ubicacion": "Ubicación",
     "email": "",
     "password": "",
     "imagen": "assets/imgs/default-avatar.jpg",

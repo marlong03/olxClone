@@ -6,6 +6,7 @@ import { AngularFirestore , AngularFirestoreDocument } from "@angular/fire/compa
 import { Router } from "@angular/router";
 import { User } from '../models/user';
 import { CookieService } from 'ngx-cookie-service';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -35,10 +36,10 @@ export class AuthService {
   }
   resetPassword(email:string){
     sendPasswordResetEmail(this.auth,email).then(() =>{
-      alert("Por favor revisa tu correo, enviamos un link para restablecer contraseña")
+
     })
     .catch(err =>{
-      alert("Ups! Lo sentimos no te encontramos, Registrate por favor")
+      Swal.fire("Ups! Lo sentimos no te encontramos, Registrate por favor",'','error')
     })
   }
   setUserData(user:any){
@@ -77,18 +78,53 @@ export class AuthService {
         console.log("se registro algo");
         result.user?.sendEmailVerification()
         this.setUserData(result.user)
-        alert("MENSAJE SUCCESS")
-        
+       /*  alert("MENSAJE SUCCESS") */
+       Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Se creo tu usuario correctamente',
+        showConfirmButton: false,
+        timer: 1000
+      }).then(()=>{
+        this.router.navigate(['login'])
+      })
       }).catch((err:any)=>{
-        alert("MENSAJE ERROR")
+       /*  alert("MENSAJE ERROR") */
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Lo sentimos no fue posible crear el usuario',
+          showConfirmButton: false,
+          timer: 1000
+        }).then(()=>{
+          this.router.navigate(['register'])
+      })
       })
   }
   logout(){
     return this.afAuth.signOut()
     .then(()=>{
       this.cs.deleteAll()
+      Swal.fire({
+        position: 'top-start',
+        icon: 'success',
+        title: '¡Vuelve pronto! 😁',
+        showConfirmButton: false,
+        timer: 2000
+      }).then(()=>{
+        this.router.navigate(['login'])
+    })
     }).catch(()=>{
-      alert("MENSAJE ERROR")
+      /* alert("MENSAJE ERROR") */
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Lo sentimos no fue posible crear el usuario',
+        showConfirmButton: false,
+        timer: 1000
+      }).then(()=>{
+        this.router.navigate(['register'])
+    })
 
     })
   }
