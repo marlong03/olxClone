@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "servicio1-bb772": {
+      "hosting": {
+        "olx": [
+          "servicio1-bb772"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "servicio1-bb772"
+  }
+}
