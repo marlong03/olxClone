@@ -1,13 +1,13 @@
 
 <app-header></app-header>
-<div class="container-fluid d-flex ">
+<div class="container-fluid d-md-flex ">
 
     
-    <aside class="col-3  py-2 px-3   d-flex   flex-column border-end border-secondary-subtle  ">
+    <aside class="col-md-3  py-2 px-3   d-flex   flex-column border-end border-secondary-subtle  ">
         <div class="container-fluid py-4 px-0">
             <input type="button" class="btn btn-dark  " value="⇐ Volver" [routerLink]="['/home']">
         </div>
-        <div class="d-flex justify-content-center flex-column ">
+        <div class="d-flex justify-content-center flex-column  ">
             
             <table class="table">
                 
@@ -89,7 +89,7 @@
             </table>
         </div>   
     </aside>
-    <div class="col-7 d-flex  mx-auto alig-items-center flex-column "  >
+    <div class="col d-flex mx-3  mx-auto alig-items-center flex-column "  >
         <div class="mt-4 mb-3 d-flex justify-content-between">
             <div>
 
@@ -102,8 +102,8 @@
             </div>
 
         </div>
-        <div class="container border border-secondary  mx-auto  p-3 d-flex justify-content-center rounded ">
-            <div class="col-6 me-2 flex-column">
+        <div class="container border border-secondary  mx-auto  p-3 d-md-flex justify-content-center rounded ">
+            <div class="col-md-6  me-2 flex-column">
                 <div id="carouselExample" class="carousel slide">
                     <div class="carousel-inner">
                       <div class="carousel-item active">
@@ -137,7 +137,7 @@
                     </div>
                   </div>
             </div>
-            <div class="col-5 d-flex flex-column  ">
+            <div class="col-md-5 d-flex flex-column  ">
                 <div class="p-3 border border-secondary rounded"> <!-- NO PINTA BIEN -->
                     <h2>{{articuloEdit.precio | currency}}</h2>
                     <p >{{articuloEdit.titulo}}</p>

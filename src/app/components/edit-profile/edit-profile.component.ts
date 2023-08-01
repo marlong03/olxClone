@@ -47,6 +47,7 @@ export class EditProfileComponent implements OnInit{
   idEditPerfil = this.usuarioLocal[0].iduser;
   usuario:any =  {}
   usuarioEdit:any =  {}
+  paises = ["bogotá","bucaramanga","rio negro","medellin","la vega","tunja","villavicencio","valledupar","cartagena","santa marta"]
   editarUsuario(){
     console.log(this.usuarioEdit);
     

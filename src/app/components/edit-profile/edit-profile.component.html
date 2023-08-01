@@ -13,10 +13,10 @@
             <div>
                 <table class="table">
                     <tbody>
-                      <tr class="d-flex flex-wrap">
+                      <!-- <tr class="d-flex flex-wrap">
                         <th scope="row">Correo</th>
                         <td>{{usuario.email}}</td>
-                      </tr>
+                      </tr> -->
                       <tr class="d-flex flex-wrap">
                         <th scope="row">Telefono</th>
                         <td>{{usuario.telefono}}</td>
@@ -54,9 +54,8 @@
                
               
                 <div class="col-md-6">
-                  <select id="inputState" class="form-select border border-secondary mx-2">
-                    <option selected>{{usuarioEdit.ubicacion}}</option>
-                    <option>...</option>
+                  <select id="inputState" class="form-select border border-secondary mx-2" name="ubicacion" [(ngModel)]="usuarioEdit.ubicacion">
+                    <option *ngFor="let pais of paises">{{pais}}</option>
                   </select>
                 </div>
                 <div class="col-md-12 d-flex alig-items-center justify-content-center border border-secondary rounded p-3">
